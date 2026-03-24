@@ -1,0 +1,31 @@
+/* Background */
+.bg-dark {
+    background-color: #78735c;
+    color: whitesmoke;
+}
+
+.bg-light-yellow {
+    background-color: #f5efdc;
+    color: #484844;
+}
+
+.bg-yellow {
+    background-color: #ffbf00;
+}
+
+.bg-dark-yellow {
+    background-color: #cb9904;
+}
+
+.fonte-padrao {
+    font-family: 'Ubuntu', 'Courier New', Courier, monospace;
+    text-align: justify;
+}
+
+.img-max-200 {
+    max-width: 200px;
+}
+
+h2 {
+    font-size: 1.5em;
+}

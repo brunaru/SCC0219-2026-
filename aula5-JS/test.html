@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validação com JavaScript</title>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    }
+
+    form {
+        max-width: 300px;
+    }
+
+    label {
+        display: block;
+        margin-top: 10px;
+    }
+
+    input {
+        width: 100%;
+        padding: 5px;
+        margin-top: 5px;
+        box-sizing: border-box;
+    }
+
+    #enviar {
+        margin-top: 15px;
+        cursor: pointer;
+    }
+
+    #alerta {
+        margin-top: 15px;
+        color: red;
+    }
+</style>
+<body>
+    <form action="" name="formulario">
+        <label for="nome">Nome Completo:</label> 
+        <input type="text" id="nome" name="nome"><br><br>
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" name="cpf">
+        <input id="enviar" type="submit">
+    </form>
+    <div id="alerta">
+        <p id="alertaNome"></p>
+        <p id="alertaCpf"></p>
+        <p id="sucesso"></p>
+    </div>
+</body>
+<script>
+    function validarNome(nome) {
+        const regexNome = /^[A-Za-zÀ-ÖØ-öø-ÿ]{2,}\s+[A-Za-zÀ-ÖØ-öø-ÿ]{2,}$/;
+        return regexNome.test(nome)
+    }
+
+    function validarCPF(cpf) {
+        const regexCPF = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/
+        return regexCPF.test(cpf)
+    }
+
+    document.getElementById('nome').addEventListener('focusout', function() {
+        const nome = this.value
+        if (!validarNome(this.value)) {
+            document.getElementById('alertaNome').textContent = 'Nome inválido! Use o formato: Nome Sobrenome.'
+        } else {
+            document.getElementById('alertaNome').textContent = ''
+        }
+    })
+    document.getElementById('cpf').addEventListener('focusout', function() {
+        const cpf = this.value
+        if (!validarCPF(cpf)) {
+            document.getElementById('alertaCpf').textContent = 'CPF inválido! Use o formato: 000.000.000-00.'
+        } else {
+            document.getElementById('alertaCpf').textContent = ''
+        }
+    })
+    document.getElementById('enviar').addEventListener('click', function(event) {
+        event.preventDefault()
+        const nome = document.getElementById('nome').value
+        const cpf = document.getElementById('cpf').value
+        // Envia os dados para o servidor
+        if(validarNome(nome) && validarCPF(cpf)) {
+            document.getElementById('sucesso').textContent = 'Formulário enviado com sucesso!'
+        }
+    })
+</script>
+</html>
