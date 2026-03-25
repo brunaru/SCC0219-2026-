@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+        }
+        .dropzone {
+            height: 100vh;
+            width: 50%;
+        }
+        .esquerda {
+            background-color: coral;
+        }
+        .direita {
+            background-color: cornflowerblue;
+        }
+        .item {
+            border: solid 5px black;
+            background-color: darkgrey;
+            color: white;
+            height: 100px;
+            font-size: 40px;
+            margin: 10px;
+            vertical-align: middle;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="dropzone esquerda">
+        <div id="1" class="item">1</div>
+        <div id="2" class="item">2</div>
+        <div id="3" class="item">3</div>
+        <div id="4" class="item">4</div>
+    </div>
+    <div class="dropzone direita"></div>
+</body>
+<script>
+    const items = document.getElementsByClassName('item')
+    const dropzones = document.getElementsByClassName('dropzone')
+
+    for(let item of items) {
+        item.draggable = true
+        item.ondragstart = function (e) {
+            e.dataTransfer.setData('item.id', e.target.id)
+        }
+    }
+    for(let zone of dropzones) {
+        zone.ondrop = function (e) {
+            const id = e.dataTransfer.getData('item.id')
+            const item = document.getElementById(id)
+            zone.appendChild(item)
+        }
+        zone.ondragover = function (e) {
+            e.preventDefault()
+        }
+    }
+</script>
+</html>
