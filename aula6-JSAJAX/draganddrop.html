@@ -46,19 +46,19 @@
 
     for(let item of items) {
         item.draggable = true
-        item.ondragstart = function (e) {
+        item.addEventListener('dragstart', function (e) {
             e.dataTransfer.setData('item.id', e.target.id)
-        }
+        })
     }
     for(let zone of dropzones) {
-        zone.ondrop = function (e) {
+        zone.addEventListener('drop', function (e) {
             const id = e.dataTransfer.getData('item.id')
             const item = document.getElementById(id)
             zone.appendChild(item)
-        }
-        zone.ondragover = function (e) {
+        })
+        zone.addEventListener('dragover', function (e) {
             e.preventDefault()
-        }
+        })
     }
 </script>
 </html>
